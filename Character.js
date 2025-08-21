@@ -6,6 +6,8 @@ export class Character {
         this.hp = hp;
         this.attackPower = attackPower;
         this.maxHp = hp; // 처음 설정한 hp값을 맥스값으로 저장
+        this.state = 'alive';
+        this.isWinner;
         this.init();
     }
     //기본 캐릭터생성
@@ -24,7 +26,14 @@ export class Character {
 
     //공격
     attack(target) {
-        if(target.hp <= 0) return;
+        if(this.state == 'dead') {
+            alert('이미 주것서요..')
+            return
+        }
+        if(this.isWinner == true) {
+            alert('이미 이겼자나요..')
+            return
+        }
 
         //때리는 모션
         this.span.classList.add('attack');
@@ -67,6 +76,14 @@ export class Character {
 
     //힐+힐 메시지
     heal () {
+        if(this.state == 'dead') {
+            alert('이미 주것서요..')
+            return
+        }
+        if(this.isWinner == true) {
+            alert('이미 이겼자나요..')
+            return
+        }
         if(this.hp == this.maxHp) {
             alert('이미 체력만땅')
             return
@@ -84,6 +101,9 @@ export class Character {
             target.span.style.opacity = 0.2;
             target.span.querySelector('small').style.display = 'none';
             alert(`${this.name} 승리!`)
+
+            target.state = 'dead';
+            this.isWinner = true;
         }
     }
 }
