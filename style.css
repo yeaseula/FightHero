@@ -105,3 +105,10 @@
     text-align: center;
     color: #fff;
 }
+
+p.attack-style {
+    background-color: yellow;
+}
+p.heal-style {
+    background-color: tan;
+}

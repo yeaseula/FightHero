@@ -8,7 +8,7 @@ export class Character {
         this.maxHp = hp; // 처음 설정한 hp값을 맥스값으로 저장
         this.init();
     }
-    //캐릭터생성
+    //기본 캐릭터생성
     init () {
         const span = document.createElement('span');
         span.classList.add(this.name)
@@ -35,16 +35,18 @@ export class Character {
         //공격 메시지
         this.attackMessage(target)
 
-        //hp 깎기
+        //상대방 hp 깎기
         target.hp -= this.attackPower;
         this.hpUpdate(target);
 
+        //상대방 생존여부 확인
         this.isAlive(target);
     }
 
     //메시지 컴포넌트
-    createMsg(text){
+    createMsg(text,magstyle){
         const attackmsg = document.createElement('p')
+        attackmsg.classList.add(magstyle)
         attackmsg.innerHTML = `${text}`
         const ground = $('.ground');
         ground.append(attackmsg);
@@ -53,10 +55,11 @@ export class Character {
     //공격메시지
     attackMessage(target){
         const msg = `[${this.name}]:${target.name} 공격!`
-        this.createMsg(msg)
+        const magstyle = 'attack-style'
+        this.createMsg(msg,magstyle)
     }
 
-    //hp 업데이트
+    //hp 정보 업데이트
     hpUpdate(target) {
         const hpState = target.span.querySelector('small');
         hpState.textContent = `${target.hp}`;
@@ -70,7 +73,8 @@ export class Character {
         };
         this.hp = this.maxHp;
         const msg = `[${this.name}]: 회복!!!`
-        this.createMsg(msg);
+        const magstyle = 'heal-style'
+        this.createMsg(msg,magstyle);
         this.hpUpdate(this)
     }
 
