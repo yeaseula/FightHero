@@ -4,12 +4,26 @@
 }
 
 * {box-sizing: border-box; padding: 0; margin: 0;}
-
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section {
+    padding-top: 40px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 .ground {
     background-color: lemonchiffon;
     width: 600px;
     height: 50vh;
     position: relative;
+}
+.ground > p {
+    margin-top: 5px;
 }
 .fight_zone {
     position: relative;
