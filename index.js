@@ -16,7 +16,7 @@ ActionBtn.forEach((btn)=>{
             const attackTarget = characterArr[e.currentTarget.dataset.to]
             cahrsName[action](attackTarget);
         } else {
-            targetname[action]();
+            cahrsName[action]();
         }
     })
 })
