@@ -1,4 +1,5 @@
 import { Character } from "./Character.js";
+import { Hero } from "./Character.js";
 
 const $ = (node) => document.querySelector(node);
 
@@ -85,23 +86,36 @@ function ChangeContainer() {
 }
 
 //선택한 캐릭터 객체 생성
-function CharsObjectInit(heroValue,monsterValue){
-    const hero = new Character(heroValue,100,20,'hero')
-    const monster = new Character(monsterValue,90,20,'monster')
-    const characterArr = [hero,monster]
+// function CharsObjectInit(heroValue,monsterValue){
+// }
 
-    const ActionBtn = document.querySelectorAll('.control-btn')
-    ActionBtn.forEach((btn)=>{
-        btn.addEventListener('click',(e)=>{
-            const cahrsName = characterArr[e.currentTarget.dataset.index];
-            const action = e.currentTarget.dataset.action; // attack or heal
+const hero = new Hero('Hero',100,20,'hero')
+const monster = new Character('Demon',90,20,'monster')
+const characterArr = [hero,monster]
 
-            if(action == 'attack') {
-                const attackTarget = characterArr[e.currentTarget.dataset.to]
-                cahrsName[action](attackTarget);
-            } else {
-                cahrsName[action]();
-            }
-        })
+const btnInfo = [
+    //히어로-필살기(랜덤확률로 2배 공격력)
+    //마법사-상대방 공격 못하게 마법 (버튼 누르면 턴 1회 후 상대 공격은 안먹힘)
+    //탱커-공격받아도 데미지 절반
+    //힐러-자신의 hp 회복 (랜덤확률로 상대방 hp 강도질)
+
+    //악마-필살기(랜덤확률로 2배 공격력)
+    //괴수-필살공격으로 즉살기(랜덤확률로 발동)
+    //언데드-공격후 hp 회복(회복점수는 랜덤), 1회 부활?
+    //슬라임-공격력은 약하지만 점점 hp 회복
+]
+
+const ActionBtn = document.querySelectorAll('.control-btn')
+ActionBtn.forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+        const cahrsName = characterArr[e.currentTarget.dataset.index];
+        const action = e.currentTarget.dataset.action; // attack or heal
+
+        if(action == 'attack') {
+            const attackTarget = characterArr[e.currentTarget.dataset.to]
+            cahrsName[action]({ target:attackTarget, isPower:true});
+        } else {
+            cahrsName[action]();
+        }
     })
-}
+})

@@ -126,6 +126,7 @@ p.heal-style {
 
 /* 캐릭터선택 */
 .character-select {
+    display: none !important;
     min-height: 500px;
     position: relative;
     padding: 50px;
