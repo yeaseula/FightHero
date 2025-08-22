@@ -63,7 +63,6 @@ h1 {
     background-color: var(--point-color);
     border-color: var(--point-color);
 }
-
 .hero,.monster {
     display: inline-block;
     position: relative;
@@ -104,7 +103,6 @@ h1 {
         right: -20px;
     }
 }
-
 .hp-state {
     position: absolute;
     top: -26px;
@@ -119,10 +117,57 @@ h1 {
     text-align: center;
     color: #fff;
 }
-
 p.attack-style {
     background-color: yellow;
 }
 p.heal-style {
     background-color: tan;
+}
+
+/* 캐릭터선택 */
+.character-select {
+    min-height: 500px;
+    position: relative;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: end;
+}
+
+.select-container {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: -999;
+    opacity: 0;
+}
+.select-container.on {
+    z-index: 5;
+    opacity: 1;
+}
+
+
+.character-select-btn-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.character-select-btn-container button {
+    flex-basis: calc(50% - 5px);
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    padding: 7px 0;
+    cursor: pointer;
+}
+.character-select-btn-container button:hover {
+    background-color: var(--point-color);
+    border-color: var(--point-color);
+}
+.character-select-btn-container button:disabled {
+    background-color: #e0e0e0;
+    border-color: #e0e0e0;
+    cursor: initial;
 }
