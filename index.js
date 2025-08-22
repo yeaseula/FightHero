@@ -1,5 +1,7 @@
 import { Character } from "./Character.js";
 import { Hero } from "./Character.js";
+import { Demon } from "./Character.js";
+import { Wizard } from "./Character.js";
 
 const $ = (node) => document.querySelector(node);
 
@@ -89,8 +91,10 @@ function ChangeContainer() {
 // function CharsObjectInit(heroValue,monsterValue){
 // }
 
+// const CharacterInitList = ['Hero','Wizard','Tanker','Healer']
+
 const hero = new Hero('Hero',100,20,'hero')
-const monster = new Character('Demon',90,20,'monster')
+const monster = new Demon('Demon',90,20,'monster')
 const characterArr = [hero,monster]
 
 const btnInfo = [

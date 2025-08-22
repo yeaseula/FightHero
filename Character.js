@@ -6,6 +6,7 @@ export class Character {
         this.type = type;
         this.attackPower = attackPower;
         this.hp = hp;
+        this.count = 1;
         this.maxHp = hp; // 처음 설정한 hp값을 맥스값으로 저장
         this.state = 'alive';
         this.isWinner;
@@ -46,8 +47,11 @@ export class Character {
         this.attackMessage(target,isPower)
 
         //상대방 hp 깎기
-        target.hp -= this.attackPower;
-        this.hpUpdate(target);
+        if(this.count > 0){
+            target.hp -= this.attackPower;
+            this.hpUpdate(target);
+        }
+        this.count++;
 
         //상대방 생존여부 확인
         this.isAlive(target);
@@ -65,7 +69,7 @@ export class Character {
     //공격메시지
     attackMessage(target,isPower){
         const attackType = isPower? '필살기 공격!' : '공격!'
-        const msg = `[${this.name}]:${target.name} ${attackType}!`
+        const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
         const magstyle = 'attack-style'
         this.createMsg(msg,magstyle)
     }
@@ -118,5 +122,36 @@ export class Hero extends Character {
         this.attackPower = damage;
         super.attack({target, isPower});
         this.attackPower = originAttackpower;
+    }
+}
+
+export class Demon extends Character {
+    attack({target,isPower}) {
+        isPower = Math.random() < 0.25;
+        const damage = isPower ? this.attackPower * 2 : this.attackPower;
+        const originAttackpower = this.attackPower;
+        this.attackPower = damage;
+        super.attack({target, isPower});
+        this.attackPower = originAttackpower;
+    }
+}
+
+export class Wizard extends Character {
+    attack({target,isPower}) {
+        super.attack({target, isPower});
+        this.shield(target);
+    }
+
+    //1회 공격 무효화
+    shield(target) {
+        target.count = 0;
+    }
+
+    //오버라이드
+    attackMessage(target,isPower){
+        const attackType = isPower? '공격 1회 무효화!' : '공격!'
+        const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
+        const magstyle = 'attack-style'
+        this.createMsg(msg,magstyle)
     }
 }
