@@ -1,8 +1,9 @@
 const $ = (node) => document.querySelector(node);
 
 export class Character {
-    constructor(name,hp,attackPower) {
+    constructor(name,hp,attackPower,type) {
         this.name = name;
+        this.type = type;
         this.hp = hp;
         this.attackPower = attackPower;
         this.maxHp = hp; // 처음 설정한 hp값을 맥스값으로 저장
@@ -13,7 +14,7 @@ export class Character {
     //기본 캐릭터생성
     init () {
         const span = document.createElement('span');
-        span.classList.add(this.name)
+        span.classList.add(this.type)
         span.innerHTML = `
             <small class='hp-state'>${this.hp}</small>
             <img src="./img/${this.name}.svg" alt="${this.name}">

@@ -58,6 +58,10 @@ selectBtnNext.addEventListener('click',(e)=>{
             return;
         }
         $('.character-select').remove();
+
+        const heroValue = heroInput.value;
+        const monsterValue = monsterInput.value;
+        CharsObjectInit(heroValue,monsterValue);
     }
 })
 
@@ -80,23 +84,24 @@ function ChangeContainer() {
     })
 }
 
-
 //선택한 캐릭터 객체 생성
-const hero = new Character('hero',100,20)
-const monster = new Character('monster',90,20)
-const characterArr = [hero,monster]
+function CharsObjectInit(heroValue,monsterValue){
+    const hero = new Character(heroValue,100,20,'hero')
+    const monster = new Character(monsterValue,90,20,'monster')
+    const characterArr = [hero,monster]
 
-const ActionBtn = document.querySelectorAll('.control-btn')
-ActionBtn.forEach((btn)=>{
-    btn.addEventListener('click',(e)=>{
-        const cahrsName = characterArr[e.currentTarget.dataset.index];
-        const action = e.currentTarget.dataset.action; // attack or heal
+    const ActionBtn = document.querySelectorAll('.control-btn')
+    ActionBtn.forEach((btn)=>{
+        btn.addEventListener('click',(e)=>{
+            const cahrsName = characterArr[e.currentTarget.dataset.index];
+            const action = e.currentTarget.dataset.action; // attack or heal
 
-        if(action == 'attack') {
-            const attackTarget = characterArr[e.currentTarget.dataset.to]
-            cahrsName[action](attackTarget);
-        } else {
-            cahrsName[action]();
-        }
+            if(action == 'attack') {
+                const attackTarget = characterArr[e.currentTarget.dataset.to]
+                cahrsName[action](attackTarget);
+            } else {
+                cahrsName[action]();
+            }
+        })
     })
-})
+}
