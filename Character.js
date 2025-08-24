@@ -155,7 +155,6 @@ export class Wizard extends Character {
 export class Tanker extends Character {
     attack({target,isPower}) {
         super.attack({target,isPower});
-        this.reciveDamage(damage,attacker)
     }
     reciveDamage(damage,attacker){
         const realDamage = damage / 2;
