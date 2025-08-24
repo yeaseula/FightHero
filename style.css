@@ -1,6 +1,15 @@
 :root {
     --main-color: rgb(173, 198, 248);
     --point-color: rgb(121, 209, 58);
+    --gold-champagne: #D4AF7F;
+    --gold-antique: #B08D57;
+    --gold-bronze: #8C7851;
+    --gold-brass: #C0A060;
+    --gold-dark: #7A6333;
+    --real-gold: #fdba00;
+    --pink-hot:#ff4f81;
+    --pink-middle: #ff82a9;
+    --pink-soft: #f8c4d5;
 }
 
 * {box-sizing: border-box; padding: 0; margin: 0;}
@@ -12,8 +21,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-section {
     padding-top: 40px;
 }
 h1 {
@@ -21,10 +28,15 @@ h1 {
     margin-bottom: 20px;
 }
 .ground {
-    background-color: lemonchiffon;
     width: 760px;
     height: 50vh;
+    margin-top: 50px;
     position: relative;
+    opacity: 0;
+    transition: all 2.8s;
+}
+.ground.on {
+    opacity: 1;
 }
 .ground > p {
     margin-top: 5px;
@@ -37,10 +49,26 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 18px;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 4px #ff82a9, 4px 4px 0 #ff4f81;
+}
+.fight_zone::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    background:url('./img/doodle-background.jpg');
+    background-size: contain;
+    z-index: 0;
 }
 .button-container {
     position: absolute;
-    top: 0;
+    top: 20px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -58,24 +86,31 @@ h1 {
 .button-container button {
     padding: 10px 30px;
     font-size: 18px;
-    background-color: var(--main-color);
-    border: 1px solid var(--main-color);
+    background-color: var(--pink-soft);
+    border: 1px solid var(--pink-soft);
     border-radius: 5px;
     cursor: pointer;
 }
 .button-container button:hover {
-    background-color: var(--point-color);
-    border-color: var(--point-color);
+    background-color: var(--pink-middle);
+    border-color: var(--pink-middle);
 }
 .hero,.monster {
-    width: 110px;
-    display: inline-block;
+    height: 105px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     transition: all 0.2s;
-    min-height: 66px;
+    text-align: center;
 }
 .hero > img,.monster > img {
-    width: 100%;
+    height: 100%;
+}
+#healer-image {
+    max-width: 120px;
+    height: auto;
 }
 .hero {
     left: -20px;
@@ -143,7 +178,7 @@ p.full-attack-style {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 70vw;
+    width: 850px;
     z-index: 10;
     transform: translate(-50%,-50%);
 }
@@ -151,40 +186,53 @@ p.full-attack-style {
     position: relative;
     padding: 50px;
     width: 100%;
-    min-height: 540px;
     display: flex;
-    align-items: end;
+    flex-direction: column;
+    gap: 30px;
     border-radius: 10px;
-    background-color: #fafafa;
-    box-shadow: 8px 8px 15px rgba(0,0,0,0.15);
+    background-color: #000000;
+    box-shadow: 8px 8px 15px rgb(212, 175, 127, 0.5);
+    color: #fff;
 }
 .select-container {
     position: absolute;
     top: 50px;
-    left: 50px;
+    left: 0;
     z-index: -999;
     opacity: 0;
 }
 .select-container.on {
+    position: relative;
+    top: 0;
     z-index: 5;
     opacity: 1;
 }
-
 .select-container > p {
     font-size: 18px;
     font-weight: 600;
+    text-align: center;
     margin-bottom: 25px;
 }
-
 .label-container {
-    width: calc(100% - 100px);
+    width: 100%;
     display: flex;
     gap: 20px;
     align-items: center;
 }
 
 .select-container input:checked +label .img-box {
-    border: 2px solid red;
+  border: 5px solid transparent;
+  border-image: linear-gradient(
+    135deg,
+    var(--gold-dark),
+    var(--gold-champagne) 25%,
+    var(--gold-antique) 50%,
+    var(--gold-champagne) 75%,
+    var(--gold-bronze)
+  ) 1;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 8px 18px rgba(0,0,0,0.45);
 }
 .label-container label {
     flex-grow: 1;
@@ -201,7 +249,7 @@ p.full-attack-style {
     aspect-ratio: 3 / 4;
     border: 2px solid transparent;
 }
-.label-container .img-box img {
+.label-container .img-box > img {
     width: 100%;
     vertical-align: bottom;
 }
@@ -217,9 +265,10 @@ p.full-attack-style {
     z-index: 5;
     width: 100%;
     height: 100%;
-    background-color: antiquewhite;
+    background-color: #424242;
     padding: 20px 10px;
     text-align: center;
+    cursor: pointer;
 }
 .hover-contents .hover-title {
     font-size: 1.4rem;
@@ -248,15 +297,17 @@ p.full-attack-style {
 }
 .character-select-btn-container button {
     flex-basis: calc(50% - 5px);
-    background-color: var(--main-color);
-    border: 1px solid var(--main-color);
+    background-color: var(--gold-brass);
+    border: 1px solid var(--gold-brass);
     border-radius: 5px;
     padding: 7px 0;
     cursor: pointer;
+    transition: all 0.2s;
 }
 .character-select-btn-container button:hover {
-    background-color: var(--point-color);
-    border-color: var(--point-color);
+    background-color: var(--gold-dark);
+    border-color: var(--gold-dark);
+    color: #fff;
 }
 .character-select-btn-container button:disabled {
     background-color: #e0e0e0;

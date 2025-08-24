@@ -61,7 +61,7 @@ selectBtnNext.addEventListener('click',(e)=>{
             return;
         }
         $('.character-select').remove();
-
+        $('.ground').classList.add('on');
         const heroValue = heroInput.value;
         const monsterValue = monsterInput.value;
         CharsObjectInit(heroValue,monsterValue);

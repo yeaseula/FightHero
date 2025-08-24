@@ -18,7 +18,7 @@ export class Character {
         span.classList.add(this.type)
         span.innerHTML = `
             <small class='hp-state'>${this.hp}</small>
-            <img src="./img/${this.name}.png" alt="${this.name}">
+            <img src="./img/${this.name}.png" alt="${this.name}" id="${this.name}-image">
         `
         const ground = $('.fight_zone');
         ground.append(span);
