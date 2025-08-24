@@ -1,4 +1,4 @@
-import { Character, Tanker, Healer, Cat } from "./Character.js";
+import { Character, Tanker, Healer, Cat, Undead } from "./Character.js";
 import { Hero } from "./Character.js";
 import { Demon } from "./Character.js";
 import { Wizard } from "./Character.js";
@@ -94,7 +94,7 @@ function ChangeContainer() {
 // const CharacterInitList = ['Hero','Wizard','Tanker','Healer']
 
 const hero = new Hero('Hero',100,20,'hero')
-const monster = new Cat('cat',90,20,'monster')
+const monster = new Undead('undead',90,20,'monster')
 const characterArr = [hero,monster]
 
 const btnInfo = [
@@ -105,7 +105,7 @@ const btnInfo = [
 
     //악마-필살기(랜덤확률로 2배 공격력)
     //괴수-필살공격으로 즉살기(랜덤확률로 발동)
-    //언데드-공격후 hp 회복(회복점수는 랜덤), 1회 부활?
+    //언데드-공격후 hp 회복(회복점수는 랜덤)?
     //슬라임-공격력은 약하지만 점점 hp 회복
 ]
 

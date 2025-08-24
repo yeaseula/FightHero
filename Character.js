@@ -221,3 +221,25 @@ export class Cat extends Character {
         this.createMsg(msg,magstyle)
     }
 }
+
+export class Undead extends Character {
+    attack({target,isPower}) {
+        super.attack({target,isPower})
+        this.recoveryHP()
+        this.recoveryHpUpdate()
+        console.log(this.hp)
+    }
+    recoveryHP(){
+        this.hp += Math.round(Math.random() * 10);
+        this.recoveryMessage()
+    }
+    recoveryHpUpdate(){
+        const hpState = this.span.querySelector('small');
+        hpState.textContent = `${this.hp}`;
+    }
+    recoveryMessage(){
+        const msg = `${this.name}의 HP가 +${Math.round(Math.random() * 10)} 증가했습니다.`
+        const magstyle = 'to-tanker-attack-style'
+        this.createMsg(msg,magstyle)
+    }
+}
