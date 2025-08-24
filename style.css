@@ -132,7 +132,7 @@ p.full-attack-style {
 
 /* 캐릭터선택 */
 .character-select {
-    display: none !important;
+    display: none;
     min-height: 500px;
     position: relative;
     padding: 50px;

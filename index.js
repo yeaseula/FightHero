@@ -88,38 +88,61 @@ function ChangeContainer() {
 }
 
 //선택한 캐릭터 객체 생성
-// function CharsObjectInit(heroValue,monsterValue){
-// }
+function CharsObjectInit(heroValue,monsterValue){
+    const characterArr = []
 
-// const CharacterInitList = ['Hero','Wizard','Tanker','Healer']
+    if(heroValue == 'hero'){
+        const hero = new Hero('hero',98,20,'hero')
+        characterArr[0] = hero
+    } else if(heroValue == 'wizard') {
+        const wizard = new Wizard('wizard',88,15,'hero')
+        characterArr[0] = wizard
+    } else if(heroValue == 'tanker') {
+        const tanker = new Tanker('tanker',100,18,'hero')
+        characterArr[0] = tanker
+    } else if(heroValue[0] == 'healer') {
+        const healer = new Healer('healer',85,12,'hero')
+        characterArr[0] = healer
+    }
 
-const hero = new Hero('Hero',100,20,'hero')
-const monster = new Slime('slime',90,20,'monster')
-const characterArr = [hero,monster]
+    if(monsterValue == 'demon') {
+        const demon = new Demon('demon',100,20,'monster')
+        characterArr[1] = demon
+    } else if(monsterValue == 'cat') {
+        const cat = new Cat('cat',97,18,'monster')
+        characterArr[1] = cat
+    } else if(monsterValue == 'undead') {
+        const undead = new Undead('undead',85,12,'monster')
+        characterArr[1] = undead
+    } else if(monsterValue == 'slime') {
+        const slime = new Slime('slime',72,8,'monster')
+        characterArr[1] = slime
+    }
 
-const btnInfo = [
-    //히어로-필살기(랜덤확률로 2배 공격력)
-    //마법사-상대방 공격 못하게 마법 (버튼 누르면 턴 1회 후 상대 공격은 안먹힘)
-    //탱커-공격받아도 데미지 절반
-    //힐러-자신의 hp 회복 (랜덤확률로 상대방 hp 강도질)
+    const btnInfo = [
+        //히어로-필살기(랜덤확률로 2배 공격력)
+        //마법사-상대방 공격 못하게 마법 (버튼 누르면 턴 1회 후 상대 공격은 안먹힘)
+        //탱커-공격받아도 데미지 절반
+        //힐러-자신의 hp 회복 (랜덤확률로 상대방 hp 강도질)
 
-    //악마-필살기(랜덤확률로 2배 공격력)
-    //괴수-필살공격으로 즉살기(랜덤확률로 발동)
-    //언데드-공격후 hp 회복(회복점수는 랜덤)?
-    //슬라임-공격력은 약하지만 점점 hp 회복
-]
+        //악마-필살기(랜덤확률로 2배 공격력)
+        //괴수-필살공격으로 즉살기(랜덤확률로 발동)
+        //언데드-공격후 hp 회복(회복점수는 랜덤)?
+        //슬라임-공격력은 약하지만 점점 hp 회복
+    ]
 
-const ActionBtn = document.querySelectorAll('.control-btn')
-ActionBtn.forEach((btn)=>{
-    btn.addEventListener('click',(e)=>{
-        const cahrsName = characterArr[e.currentTarget.dataset.index];
-        const action = e.currentTarget.dataset.action; // attack or heal
+    const ActionBtn = document.querySelectorAll('.control-btn')
+    ActionBtn.forEach((btn)=>{
+        btn.addEventListener('click',(e)=>{
+            const cahrsName = characterArr[e.currentTarget.dataset.index];
+            const action = e.currentTarget.dataset.action; // attack or heal
 
-        if(action == 'attack') {
-            const attackTarget = characterArr[e.currentTarget.dataset.to]
-            cahrsName[action]({ target:attackTarget, isPower:true});
-        } else {
-            cahrsName[action]();
-        }
+            if(action == 'attack') {
+                const attackTarget = characterArr[e.currentTarget.dataset.to]
+                cahrsName[action]({ target:attackTarget, isPower:true});
+            } else {
+                cahrsName[action]();
+            }
+        })
     })
-})
+}
