@@ -166,7 +166,7 @@ export class Wizard extends Character {
 export class Tanker extends Character {
     attack({target,isPower}) {
         super.attack({target,isPower});
-        reciveDamage(damage,attacker)
+        this.reciveDamage(damage,attacker)
     }
     reciveDamage(damage,attacker){
         const realDamage = damage / 2;
@@ -175,6 +175,30 @@ export class Tanker extends Character {
     }
     revieveattackMessage(attacker){
         const msg = `${attacker.name} 공격력 절반으로 감소!!`
+        const magstyle = 'to-tanker-attack-style'
+        this.createMsg(msg,magstyle)
+    }
+}
+
+export class Healer extends Character {
+    attack({target,isPower}) {
+        super.attack({target,isPower})
+        this.reciveDamage(damage,attacker,isPower)
+    }
+    reciveDamage(damage,attacker,isPower){
+        isPower = Math.random() < 0.55;
+        console.log(isPower)
+        //3의 배수일 때 마다 랜덤확률로 힐
+        if(attacker.count == 3 && isPower) {
+            this.hp = this.maxHp;
+            this.revieveattackMessage()
+            return attacker.count = 0;
+        } else {
+            this.hp -= damage
+        }
+    }
+    revieveattackMessage(){
+        const msg = `${this.name} 힐러의 HP가 충전됐습니다.`
         const magstyle = 'to-tanker-attack-style'
         this.createMsg(msg,magstyle)
     }
