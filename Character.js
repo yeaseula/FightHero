@@ -132,17 +132,6 @@ export class Hero extends Character {
     }
 }
 
-export class Demon extends Character {
-    attack({target,isPower}) {
-        isPower = Math.random() < 0.25;
-        const damage = isPower ? this.attackPower * 2 : this.attackPower;
-        const originAttackpower = this.attackPower;
-        this.attackPower = damage;
-        super.attack({target, isPower});
-        this.attackPower = originAttackpower;
-    }
-}
-
 export class Wizard extends Character {
     attack({target,isPower}) {
         super.attack({target, isPower});
@@ -200,6 +189,35 @@ export class Healer extends Character {
     revieveattackMessage(){
         const msg = `${this.name} 힐러의 HP가 충전됐습니다.`
         const magstyle = 'to-tanker-attack-style'
+        this.createMsg(msg,magstyle)
+    }
+}
+
+export class Demon extends Character {
+    attack({target,isPower}) {
+        isPower = Math.random() < 0.25;
+        const damage = isPower ? this.attackPower * 2 : this.attackPower;
+        const originAttackpower = this.attackPower;
+        this.attackPower = damage;
+        super.attack({target, isPower});
+        this.attackPower = originAttackpower;
+    }
+}
+
+export class Cat extends Character {
+    attack({target,isPower}) {
+        isPower = Math.random() < 0.33;
+        const fullPower = target.hp;
+        const damage = isPower ? fullPower : this.attackPower;
+        const originAttackpower = this.attackPower;
+        this.attackPower = damage;
+        super.attack({target, isPower});
+        this.attackPower = originAttackpower;
+    }
+    attackMessage(target,isPower){
+        const attackType = isPower? '즉살기 [냥냥펀치] 공격!' : '공격!'
+        const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
+        const magstyle = 'full-attack-style'
         this.createMsg(msg,magstyle)
     }
 }

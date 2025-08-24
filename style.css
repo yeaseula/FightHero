@@ -126,6 +126,9 @@ p.heal-style {
 p.to-tanker-attack-style {
     background-color: skyblue;
 }
+p.full-attack-style {
+    background-color: palevioletred;
+}
 
 /* 캐릭터선택 */
 .character-select {

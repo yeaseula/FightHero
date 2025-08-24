@@ -1,4 +1,4 @@
-import { Character, Tanker, Healer } from "./Character.js";
+import { Character, Tanker, Healer, Cat } from "./Character.js";
 import { Hero } from "./Character.js";
 import { Demon } from "./Character.js";
 import { Wizard } from "./Character.js";
@@ -93,8 +93,8 @@ function ChangeContainer() {
 
 // const CharacterInitList = ['Hero','Wizard','Tanker','Healer']
 
-const hero = new Tanker('tanker',100,20,'hero')
-const monster = new Demon('Demon',90,20,'monster')
+const hero = new Hero('Hero',100,20,'hero')
+const monster = new Cat('cat',90,20,'monster')
 const characterArr = [hero,monster]
 
 const btnInfo = [
