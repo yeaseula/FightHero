@@ -135,7 +135,7 @@ function CharsObjectInit(heroValue,monsterValue){
 
             if(action == 'attack') {
                 const attackTarget = characterArr[e.currentTarget.dataset.to]
-                cahrsName[action]({ target:attackTarget, isPower:true});
+                cahrsName[action]({ target:attackTarget, isPower:false});
             } else {
                 cahrsName[action]();
             }
