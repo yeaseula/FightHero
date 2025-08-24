@@ -89,35 +89,31 @@ function ChangeContainer() {
 
 //선택한 캐릭터 객체 생성
 function CharsObjectInit(heroValue,monsterValue){
-    const characterArr = []
 
-    if(heroValue == 'hero'){
-        const hero = new Hero('hero',98,20,'hero')
-        characterArr[0] = hero
-    } else if(heroValue == 'wizard') {
-        const wizard = new Wizard('wizard',88,15,'hero')
-        characterArr[0] = wizard
-    } else if(heroValue == 'tanker') {
-        const tanker = new Tanker('tanker',100,18,'hero')
-        characterArr[0] = tanker
-    } else if(heroValue[0] == 'healer') {
-        const healer = new Healer('healer',85,12,'hero')
-        characterArr[0] = healer
+    const heroTeam = {
+        hero: {chars: Hero, hp:98, attackPower: 20, type: 'hero'},
+        wizard: {chars: Wizard, hp:88, attackPower:15, type: 'hero'},
+        tanker: {chars: Tanker, hp:100, attackPower:18, type: 'hero'},
+        healer: {chars: Healer, hp:85, attackPower:12, type: 'hero'}
     }
 
-    if(monsterValue == 'demon') {
-        const demon = new Demon('demon',100,20,'monster')
-        characterArr[1] = demon
-    } else if(monsterValue == 'cat') {
-        const cat = new Cat('cat',97,18,'monster')
-        characterArr[1] = cat
-    } else if(monsterValue == 'undead') {
-        const undead = new Undead('undead',85,12,'monster')
-        characterArr[1] = undead
-    } else if(monsterValue == 'slime') {
-        const slime = new Slime('slime',72,8,'monster')
-        characterArr[1] = slime
+    const monsterTeam = {
+        demon : {chars: Demon, hp:100, attackPower: 20, type: 'monster'},
+        cat : {chars: Cat, hp:97, attackPower: 18, type: 'monster'},
+        undead : {chars: Undead, hp:85, attackPower: 12, type: 'monster'},
+        slime : {chars: Slime, hp:72, attackPower: 9, type: 'monster'},
     }
+
+    function createCharacter(map,key){
+        const Chars = map[key];
+        return new Chars.chars(key,Chars.hp,Chars.attackPower,Chars.type)
+    }
+
+    const HeroGet = createCharacter(heroTeam,heroValue)
+    const MonsterGet = createCharacter(monsterTeam,monsterValue)
+
+    const characterArr = [HeroGet,MonsterGet]
+
 
     const btnInfo = [
         //히어로-필살기(랜덤확률로 2배 공격력)
