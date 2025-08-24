@@ -88,25 +88,25 @@ export class Character {
     }
 
     //힐+힐 메시지
-    heal () {
-        if(this.state == 'dead') {
-            alert('이미 주것서요..')
-            return
-        }
-        if(this.isWinner == true) {
-            alert('이미 이겼자나요..')
-            return
-        }
-        if(this.hp == this.maxHp) {
-            alert('이미 체력만땅')
-            return
-        };
-        this.hp = this.maxHp;
-        const msg = `[${this.name}]: 회복!!!`
-        const magstyle = 'heal-style'
-        this.createMsg(msg,magstyle);
-        this.hpUpdate(this)
-    }
+    // heal () {
+    //     if(this.state == 'dead') {
+    //         alert('이미 주것서요..')
+    //         return
+    //     }
+    //     if(this.isWinner == true) {
+    //         alert('이미 이겼자나요..')
+    //         return
+    //     }
+    //     if(this.hp == this.maxHp) {
+    //         alert('이미 체력만땅')
+    //         return
+    //     };
+    //     this.hp = this.maxHp;
+    //     const msg = `[${this.name}]: 회복!!!`
+    //     const magstyle = 'heal-style'
+    //     this.createMsg(msg,magstyle);
+    //     this.hpUpdate(this)
+    // }
 
     //살아있냐죽었냐+메시지
     isAlive (target) {
@@ -227,7 +227,7 @@ export class Undead extends Character {
         super.attack({target,isPower})
         this.recoveryHP()
         this.recoveryHpUpdate()
-        console.log(this.hp)
+        //console.log(this.hp)
     }
     recoveryHP(){
         this.hp += Math.round(Math.random() * 10);
@@ -241,5 +241,15 @@ export class Undead extends Character {
         const msg = `${this.name}의 HP가 +${Math.round(Math.random() * 10)} 증가했습니다.`
         const magstyle = 'to-tanker-attack-style'
         this.createMsg(msg,magstyle)
+    }
+}
+
+export class Slime extends Character {
+    constructor(name,hp,attackPower,type){
+        super(name,hp,attackPower,type)
+        setInterval(()=>{
+            this.hp += 1;
+            this.hpUpdate(this)
+        },800)
     }
 }
