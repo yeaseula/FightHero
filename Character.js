@@ -48,13 +48,20 @@ export class Character {
 
         //상대방 hp 깎기
         if(this.count > 0){
-            target.hp -= this.attackPower;
+            target.reciveDamage(this.attackPower, this)
             this.hpUpdate(target);
         }
         this.count++;
 
         //상대방 생존여부 확인
         this.isAlive(target);
+
+    }
+
+    //데미지 함수
+    reciveDamage(damage,attacker){
+        const realDamage = damage;
+        this.hp -= damage;
     }
 
     //메시지 컴포넌트
@@ -152,6 +159,23 @@ export class Wizard extends Character {
         const attackType = isPower? '공격 1회 무효화!' : '공격!'
         const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
         const magstyle = 'attack-style'
+        this.createMsg(msg,magstyle)
+    }
+}
+
+export class Tanker extends Character {
+    attack({target,isPower}) {
+        super.attack({target,isPower});
+        reciveDamage(damage,attacker)
+    }
+    reciveDamage(damage,attacker){
+        const realDamage = damage / 2;
+        this.hp -= realDamage;
+        this.revieveattackMessage(attacker)
+    }
+    revieveattackMessage(attacker){
+        const msg = `${attacker.name} 공격력 절반으로 감소!!`
+        const magstyle = 'to-tanker-attack-style'
         this.createMsg(msg,magstyle)
     }
 }
