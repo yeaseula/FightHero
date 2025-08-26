@@ -77,11 +77,15 @@ body.on {
     width: 760px;
     height: 50vh;
     margin-top: 50px;
-    position: relative;
+    position: absolute;
+    top: 0;
+    z-index: -999;
     opacity: 0;
     transition: all 2.8s;
 }
 .ground.on {
+    position: relative;
+    z-index: 5;
     opacity: 1;
 }
 .fight_zone {
@@ -201,6 +205,9 @@ body.on {
     font-size: 1.7rem;
     font-family: 'child_manseh';
     font-weight: 600;
+}
+.message-zone > p.intro-style {
+    background-color: #FFF9C4;
 }
 .message-zone > p.attack-style {
     background-color: #f5f5f5;

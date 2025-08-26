@@ -12,6 +12,7 @@ export class Character {
         this.state = 'alive';
         this.isWinner;
         this.init();
+        this.introduce();
     }
     //기본 캐릭터생성
     init () {
@@ -74,6 +75,13 @@ export class Character {
         messageZone.prepend(attackmsg);
     }
 
+    //캐릭터 소개 메시지
+    introduce () {
+        const msg = `안녕하세요! ${this.koName} 캐릭터, 000입니다.`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
+    }
+
     //공격메시지
     attackMessage(target,isPower){
         const attackType = isPower? '필살기 공격!' : '공격!'
@@ -124,6 +132,12 @@ export class Hero extends Character {
         super.attack({target, isPower});
         this.attackPower = originAttackpower;
     }
+
+    introduce () {
+        const msg = `[${this.koName}] 무적의 히어로! 임영웅 등장!`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
+    }
 }
 
 export class Wizard extends Character {
@@ -145,6 +159,12 @@ export class Wizard extends Character {
         const magstyle = isPower? 'shield-style':'attack-style'
         this.createMsg(msg,magstyle)
     }
+
+    introduce () {
+        const msg = `[${this.koName}] 더러운 머드블러드..슬리데린 후계자는 나야`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
+    }
 }
 
 export class Tanker extends Character {
@@ -159,6 +179,11 @@ export class Tanker extends Character {
     revieveattackMessage(attacker){
         const msg = `${attacker.koName} 공격력 절반으로 감소!!`
         const magstyle = 'to-tanker-attack-style'
+        this.createMsg(msg,magstyle)
+    }
+    introduce () {
+        const msg = `[${this.koName}] 탱크보이입니다..(수줍)`
+        const magstyle = 'intro-style'
         this.createMsg(msg,magstyle)
     }
 }
@@ -185,6 +210,11 @@ export class Healer extends Character {
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
+    introduce () {
+        const msg = `[${this.koName}] 상처엔 후~ 후시딘`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
+    }
 }
 
 export class Demon extends Character {
@@ -195,6 +225,11 @@ export class Demon extends Character {
         this.attackPower = damage;
         super.attack({target, isPower});
         this.attackPower = originAttackpower;
+    }
+    introduce () {
+        const msg = `[${this.koName}] 으르릉..`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
     }
 }
 
@@ -212,6 +247,11 @@ export class Cat extends Character {
         const attackType = isPower? '즉살기 [냥냥펀치] 공격!' : '공격!'
         const msg = `[${this.koName}]:${target.koName}에게 ${attackType}!`
         const magstyle = isPower? 'full-attack-style' : 'attack-style';
+        this.createMsg(msg,magstyle)
+    }
+    introduce () {
+        const msg = `[${this.koName}] 배 만지지마라 죽인다. 다리도 만지지 마라`
+        const magstyle = 'intro-style'
         this.createMsg(msg,magstyle)
     }
 }
@@ -236,6 +276,11 @@ export class Undead extends Character {
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
+    introduce () {
+        const msg = `[${this.koName}] 앗..들킴`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
+    }
 }
 
 export class Slime extends Character {
@@ -245,5 +290,10 @@ export class Slime extends Character {
             this.hp += 1;
             this.hpUpdate(this)
         },800)
+    }
+    introduce () {
+        const msg = `[${this.koName}] 제발 바람풍선만은 참아주세요..`
+        const magstyle = 'intro-style'
+        this.createMsg(msg,magstyle)
     }
 }
