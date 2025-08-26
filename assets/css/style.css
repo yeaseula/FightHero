@@ -202,19 +202,19 @@ body.on {
     font-family: 'child_manseh';
     font-weight: 600;
 }
-p.attack-style {
-    background-color: yellow;
+.message-zone > p.attack-style {
+    background-color: #f5f5f5;
 }
-p.heal-style {
-    background-color: tan;
+.message-zone > p.heal-style {
+    background-color: #A5D6A7;
 }
-p.to-tanker-attack-style {
-    background-color: skyblue;
+.message-zone > p.to-tanker-attack-style {
+    background-color: #78909C;
 }
-p.undead-attack-style {
-    background-color: skyblue;
+.message-zone > p.undead-attack-style {
+    background-color: #43A047;
 }
-p.full-attack-style {
+.message-zone > p.full-attack-style {
     background-color: var(--pink-soft);
 }
 
