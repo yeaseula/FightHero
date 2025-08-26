@@ -22,7 +22,7 @@ export class Character {
             <small class='hp-state'>${this.hp}</small>
             <div class='hp-bar'><div><span class='hp-bar-inner' style='width:${this.hp}%'></span></div></div>
             <small class='chars-name'>${this.koName}</small>
-            <img src="./assets/img/${this.name}.png" alt="${this.name}" id="${this.name}-image">
+            <img src="../assets/img/${this.name}.png" alt="${this.name}" id="${this.name}-image">
         `
         const ground = $('.fight_zone');
         ground.append(container);
