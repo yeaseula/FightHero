@@ -250,6 +250,9 @@ export class Cat extends Character {
         const damage = isPower ? fullPower : this.attackPower;
         const originAttackpower = this.attackPower;
         this.attackPower = damage;
+        if(isPower) {
+            this.count = 1;
+        }
         super.attack({target, isPower});
         this.attackPower = originAttackpower;
     }
