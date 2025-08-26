@@ -229,7 +229,6 @@ body.on {
     display: inline-block;
     border-radius: 3px;
     font-size: 1.2rem;
-    width: auto;
     text-align: center;
     color: #fff;
 }

@@ -218,6 +218,7 @@ export class Healer extends Character {
         const msg = `${this.koName} 힐러의 HP가 충전됐습니다.`
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
+        this.hpUpdate(this)
     }
     introduce () {
         const msg = `[${this.koName}] 상처엔 후~ 후시딘`
