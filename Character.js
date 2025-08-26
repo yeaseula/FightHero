@@ -16,16 +16,18 @@ export class Character {
     }
     //기본 캐릭터생성
     init () {
-        const span = document.createElement('span');
-        span.classList.add(this.type)
-        span.innerHTML = `
+        const container = document.createElement('div');
+        container.classList.add(this.type)
+        container.innerHTML = `
             <small class='hp-state'>${this.hp}</small>
+            <div class='hp-bar'><div><span class='hp-bar-inner' style='width:${this.hp}%'></span></div></div>
+            <small class='chars-name'>${this.koName}</small>
             <img src="./assets/img/${this.name}.png" alt="${this.name}" id="${this.name}-image">
         `
         const ground = $('.fight_zone');
-        ground.append(span);
+        ground.append(container);
 
-        this.span = span;
+        this.container = container;
     }
 
     //공격
@@ -40,9 +42,9 @@ export class Character {
         }
 
         //때리는 모션
-        this.span.classList.add('attack');
+        this.container.classList.add('attack');
         setTimeout(() => {
-            this.span.classList.remove('attack')
+            this.container.classList.remove('attack')
         }, 850);
 
         //공격 메시지
@@ -54,6 +56,7 @@ export class Character {
             this.hpUpdate(target);
         }
         this.count++;
+        this.hpBarUpdate(target)
 
         //상대방 생존여부 확인
         this.isAlive(target);
@@ -90,17 +93,23 @@ export class Character {
         this.createMsg(msg,magstyle)
     }
 
+    //hp bar 업데이트
+    hpBarUpdate (target) {
+        const hpBar = target.container.querySelector('.hp-bar-inner');
+        hpBar.style.width = `${target.hp}%`
+    }
+
     //hp 정보 업데이트
     hpUpdate(target) {
-        const hpState = target.span.querySelector('small');
+        const hpState = target.container.querySelector('small');
         hpState.textContent = `${target.hp}`;
     }
 
     //살아있냐죽었냐+메시지
     isAlive (target) {
         if(target.hp <= 0) {
-            target.span.style.opacity = 0.2;
-            target.span.querySelector('small').style.display = 'none';
+            target.container.style.opacity = 0.2;
+            target.container.querySelector('small').style.display = 'none';
             target.state = 'dead';
             this.isWinner = true;
             this.isWinnerMessage()
@@ -268,7 +277,7 @@ export class Undead extends Character {
         this.recoveryMessage()
     }
     recoveryHpUpdate(){
-        const hpState = this.span.querySelector('small');
+        const hpState = this.container.querySelector('small');
         hpState.textContent = `${this.hp}`;
     }
     recoveryMessage(){
@@ -288,7 +297,8 @@ export class Slime extends Character {
         super(name,hp,attackPower,type,koName)
         setInterval(()=>{
             this.hp += 1;
-            this.hpUpdate(this)
+            this.hpUpdate(this);
+            this.hpBarUpdate(this);
         },800)
     }
     introduce () {
