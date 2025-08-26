@@ -61,6 +61,8 @@ selectBtnNext.addEventListener('click',(e)=>{
             return;
         }
         $('.character-select').remove();
+        $('body').classList.add('on');
+        $('.game-title').classList.add('on');
         $('.ground').classList.add('on');
         const heroValue = heroInput.value;
         const monsterValue = monsterInput.value;

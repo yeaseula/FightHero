@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fight Hero</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="preload" href="./assets/fonts/SF_HambakSnow.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/fonts/YoonChildfundkoreaManSeh.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./index.js" type="module"></script>
 </head>
 <body>
     <section>
+        <h1 class="sr-only">Fight Hero 게임</h1>
+        <p class="game-title">Fight Hero</p>
         <input type="hidden" value="" name="herotype" id="heroteam-input">
         <input type="hidden" value="" name="monstertype" id="monsterteam-input">
         <div class="character-select">
@@ -20,7 +24,7 @@
                                 <input type="radio" value="hero" id="hero" name="heroteam">
                                 <label for="hero">
                                     <div class="img-box">
-                                        <img src="./img/card-hero.png" alt="주인공 히어로 캐릭터">
+                                        <img src="./assets/img/card-hero.webp" alt="주인공 히어로 캐릭터">
                                         <div class="hover-contents">
                                             <p class="hover-title">히어로팀의 리더 용사</p>
                                             <p class="hover-cont">
@@ -36,7 +40,7 @@
                                 <input type="radio" value="wizard" id="wizard" name="heroteam">
                                 <label for="wizard">
                                     <div class="img-box">
-                                        <img src="./img/card-wizard.png" alt="신비로운 마법사 캐릭터">
+                                        <img src="./assets/img/card-wizard.webp" alt="신비로운 마법사 캐릭터">
                                         <div class="hover-contents">
                                             <p class="hover-title">신비로운 마법사</p>
                                             <p class="hover-cont">
@@ -52,7 +56,7 @@
                                 <input type="radio" value="tanker" id="tanker" name="heroteam">
                                 <label for="tanker">
                                     <div class="img-box">
-                                        <img src="./img/card-tanker.png" alt="강인한 탱커 캐릭터">
+                                        <img src="./assets/img/card-tanker.webp" alt="강인한 탱커 캐릭터">
                                         <div class="hover-contents">
                                             <p class="hover-title">방어력 만렙 탱커</p>
                                             <p class="hover-cont">
@@ -68,7 +72,7 @@
                                 <input type="radio" value="healer" id="healer" name="heroteam">
                                 <label for="healer">
                                     <div class="img-box">
-                                        <img src="./img/card-healer.png" alt="성스러운 치유의 정령 힐러 캐릭터">
+                                        <img src="./assets/img/card-healer.webp" alt="성스러운 치유의 정령 힐러 캐릭터">
                                         <div class="hover-contents">
                                             <p class="hover-title">치유의 정령 힐러</p>
                                             <p class="hover-cont">
@@ -88,7 +92,7 @@
                             <input type="radio" value="demon" id="demon" name="monsterteam">
                             <label for="demon">
                                 <div class="img-box">
-                                    <img src="./img/card-demon.png" alt="악마 캐릭터">
+                                    <img src="./assets/img/card-demon.webp" alt="악마 캐릭터">
                                     <div class="hover-contents">
                                         <p class="hover-title">지옥에서 온 악마</p>
                                         <p class="hover-cont">
@@ -103,7 +107,7 @@
                             <input type="radio" value="cat" id="cat" name="monsterteam">
                             <label for="cat">
                                 <div class="img-box">
-                                    <img src="./img/card-cat.png" alt="괴수 캐릭터">
+                                    <img src="./assets/img/card-cat.webp" alt="괴수 캐릭터">
                                     <div class="hover-contents">
                                         <p class="hover-title">지옥의 수문장 괴수</p>
                                         <p class="hover-cont">
@@ -118,7 +122,7 @@
                             <input type="radio" value="undead" id="undead" name="monsterteam">
                             <label for="undead">
                                 <div class="img-box">
-                                    <img src="./img/card-undead.png" alt="언데드 캐릭터">
+                                    <img src="./assets/img/card-undead.webp" alt="언데드 캐릭터">
                                     <div class="hover-contents">
                                         <p class="hover-title">꺼지지않는 생명 언데드</p>
                                         <p class="hover-cont">
@@ -134,7 +138,7 @@
                             <input type="radio" value="slime" id="slime" name="monsterteam">
                             <label for="slime">
                                 <div class="img-box">
-                                    <img src="./img/card-slime.png" alt="슬라임 캐릭터">
+                                    <img src="./assets/img/card-slime.webp" alt="슬라임 캐릭터">
                                     <div class="hover-contents">
                                         <p class="hover-title">귀여운 외모의 슬라임</p>
                                         <p class="hover-cont">
@@ -156,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <h1>Fight Hero</h1>
+
         <div class="ground">
             <div class="button-container">
                 <div class="button-field">
@@ -168,6 +172,7 @@
             </div>
 
             <div class="fight_zone"></div>
+            <div class="message-zone"></div>
         </div>
     </section>
 </body>

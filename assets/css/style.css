@@ -11,8 +11,28 @@
     --pink-middle: #ff82a9;
     --pink-soft: #f8c4d5;
 }
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('../fonts/SF_HambakSnow.woff2') format('woff2'), url('../fonts/SF_HambakSnow.woff') format('woff');
+    display: swap;
+}
+@font-face {
+    font-family: 'child_manseh';
+    src: url('../fonts/YoonChildfundkoreaManSeh.woff2') format('woff2'), url('../fonts/YoonChildfundkoreaManSeh.woff') format('woff');
+    display: swap;
+}
 
 * {box-sizing: border-box; padding: 0; margin: 0;}
+.sr-only {
+    clip: rect(1px,1px,1px,1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
 html {
     font-size: 10px;
 }
@@ -22,10 +42,22 @@ body {
     align-items: center;
     justify-content: center;
     padding-top: 40px;
+    background-color: #212121;
 }
-h1 {
+body.on {
+    background: #fffbf4;
+}
+.game-title {
+    margin-bottom: 50px;
+    font-size: 5rem;
     text-align: center;
-    margin-bottom: 20px;
+    font-family: 'SF_HambakSnow';
+    color: #fff;
+}
+.game-title.on {
+    font-family: 'child_manseh';
+    font-weight: bold;
+    color: #212121;
 }
 .ground {
     width: 760px;
@@ -38,9 +70,6 @@ h1 {
 .ground.on {
     opacity: 1;
 }
-.ground > p {
-    margin-top: 5px;
-}
 .fight_zone {
     position: relative;
     border: 1px solid;
@@ -50,8 +79,8 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 18px;
-    border: 4px solid #fff;
-    box-shadow: 0 0 0 4px #ff82a9, 4px 4px 0 #ff4f81;
+    border: 2px solid #fff;
+    border-radius: 5px;
 }
 .fight_zone::before {
     content: '';
@@ -61,9 +90,8 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.3;
-    background:url('./img/doodle-background.jpg');
-    background-size: contain;
+    opacity: 0.75;
+    background:url('../img/doodle-background-fu.png') no-repeat center/cover;
     z-index: 0;
 }
 .button-container {
@@ -85,7 +113,9 @@ h1 {
 }
 .button-container button {
     padding: 10px 30px;
-    font-size: 18px;
+    font-size: 1.8rem;
+    font-family: 'child_manseh';
+    font-weight: 600;
     background-color: var(--pink-soft);
     border: 1px solid var(--pink-soft);
     border-radius: 5px;
@@ -160,6 +190,18 @@ h1 {
     text-align: center;
     color: #fff;
 }
+/* 메시지존 */
+.message-zone {
+    max-height: 200px;
+    margin-top: 10px;
+    overflow-y: scroll;
+}
+.message-zone > p {
+    margin-top: 5px;
+    font-size: 1.7rem;
+    font-family: 'child_manseh';
+    font-weight: 600;
+}
 p.attack-style {
     background-color: yellow;
 }
@@ -169,18 +211,16 @@ p.heal-style {
 p.to-tanker-attack-style {
     background-color: skyblue;
 }
+p.undead-attack-style {
+    background-color: skyblue;
+}
 p.full-attack-style {
-    background-color: palevioletred;
+    background-color: var(--pink-soft);
 }
 
 /* 캐릭터선택 */
 .character-select {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 850px;
-    z-index: 10;
-    transform: translate(-50%,-50%);
+    width: 860px;
 }
 .character-select > div {
     position: relative;
@@ -191,7 +231,6 @@ p.full-attack-style {
     gap: 30px;
     border-radius: 10px;
     background-color: #000000;
-    box-shadow: 8px 8px 15px rgb(212, 175, 127, 0.5);
     color: #fff;
 }
 .select-container {
@@ -208,10 +247,10 @@ p.full-attack-style {
     opacity: 1;
 }
 .select-container > p {
-    font-size: 18px;
+    font-size: 2rem;
     font-weight: 600;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
 }
 .label-container {
     width: 100%;
@@ -247,7 +286,9 @@ p.full-attack-style {
     position: relative;
     width: 100%;
     aspect-ratio: 3 / 4;
-    border: 2px solid transparent;
+    border: 5px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
 }
 .label-container .img-box > img {
     width: 100%;
@@ -301,10 +342,12 @@ p.full-attack-style {
     border: 1px solid var(--gold-brass);
     border-radius: 5px;
     padding: 7px 0;
+    font-size: 1.8rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
 }
-.character-select-btn-container button:hover {
+.character-select-btn-container button:not(:disabled):hover {
     background-color: var(--gold-dark);
     border-color: var(--gold-dark);
     color: #fff;

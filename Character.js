@@ -18,7 +18,7 @@ export class Character {
         span.classList.add(this.type)
         span.innerHTML = `
             <small class='hp-state'>${this.hp}</small>
-            <img src="./img/${this.name}.png" alt="${this.name}" id="${this.name}-image">
+            <img src="./assets/img/${this.name}.png" alt="${this.name}" id="${this.name}-image">
         `
         const ground = $('.fight_zone');
         ground.append(span);
@@ -69,8 +69,8 @@ export class Character {
         const attackmsg = document.createElement('p')
         attackmsg.classList.add(magstyle)
         attackmsg.innerHTML = `${text}`
-        const ground = $('.ground');
-        ground.append(attackmsg);
+        const messageZone = $('.message-zone');
+        messageZone.append(attackmsg);
     }
 
     //공격메시지
@@ -187,7 +187,7 @@ export class Healer extends Character {
     }
     revieveattackMessage(){
         const msg = `${this.name} 힐러의 HP가 충전됐습니다.`
-        const magstyle = 'to-tanker-attack-style'
+        const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
 }
@@ -238,7 +238,7 @@ export class Undead extends Character {
     }
     recoveryMessage(){
         const msg = `${this.name}의 HP가 +${Math.round(Math.random() * 10)} 증가했습니다.`
-        const magstyle = 'to-tanker-attack-style'
+        const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
 }
