@@ -88,27 +88,6 @@ export class Character {
         hpState.textContent = `${target.hp}`;
     }
 
-    //힐+힐 메시지
-    // heal () {
-    //     if(this.state == 'dead') {
-    //         alert('이미 주것서요..')
-    //         return
-    //     }
-    //     if(this.isWinner == true) {
-    //         alert('이미 이겼자나요..')
-    //         return
-    //     }
-    //     if(this.hp == this.maxHp) {
-    //         alert('이미 체력만땅')
-    //         return
-    //     };
-    //     this.hp = this.maxHp;
-    //     const msg = `[${this.name}]: 회복!!!`
-    //     const magstyle = 'heal-style'
-    //     this.createMsg(msg,magstyle);
-    //     this.hpUpdate(this)
-    // }
-
     //살아있냐죽었냐+메시지
     isAlive (target) {
         if(target.hp <= 0) {
