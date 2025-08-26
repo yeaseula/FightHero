@@ -33,6 +33,20 @@
     padding: 0;
     position: absolute;
 }
+.com-btn {
+    padding: 10px 30px;
+    font-size: 1.8rem;
+    font-family: 'child_manseh';
+    font-weight: 600;
+    background-color: var(--pink-soft);
+    border: 1px solid var(--pink-soft);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.com-btn:hover {
+    background-color: var(--pink-middle);
+    border-color: var(--pink-middle);
+}
 html {
     font-size: 10px;
 }
@@ -110,20 +124,6 @@ body.on {
     justify-content: center;
     align-items: center;
     gap: 10px;
-}
-.button-container button {
-    padding: 10px 30px;
-    font-size: 1.8rem;
-    font-family: 'child_manseh';
-    font-weight: 600;
-    background-color: var(--pink-soft);
-    border: 1px solid var(--pink-soft);
-    border-radius: 5px;
-    cursor: pointer;
-}
-.button-container button:hover {
-    background-color: var(--pink-middle);
-    border-color: var(--pink-middle);
 }
 .hero,.monster {
     height: 105px;
@@ -225,6 +225,33 @@ body.on {
     background-color: var(--pink-soft);
 }
 
+.iswinner-msg {
+    z-index: -999;
+    opacity: 0;
+}
+.iswinner-msg.on {
+    width: 360px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    opacity: 1;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+.iswinner-msg.on p {
+    font-family: 'child_manseh';
+    font-weight: 600;
+    font-size: 2.4rem;
+}
 /* 캐릭터선택 */
 .character-select {
     width: 860px;

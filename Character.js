@@ -114,11 +114,25 @@ export class Character {
         if(target.hp <= 0) {
             target.span.style.opacity = 0.2;
             target.span.querySelector('small').style.display = 'none';
-            alert(`${this.name} 승리!`)
-
             target.state = 'dead';
             this.isWinner = true;
+            this.isWinnerMessage()
         }
+    }
+
+    isWinnerMessage () {
+        if(this.isWinner) {
+            const isWinnerMsg = document.querySelector('.iswinner-msg');
+            isWinnerMsg.classList.add('on');
+            isWinnerMsg.innerHTML = `
+                <p>${this.koName}의 승리에요!</p>
+                <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
+            `
+
+            $('#close-msg-btn').addEventListener('click',()=>{
+                isWinnerMsg.classList.remove('on')
+            })
+        } else {}
     }
 }
 
@@ -218,7 +232,7 @@ export class Cat extends Character {
     attackMessage(target,isPower){
         const attackType = isPower? '즉살기 [냥냥펀치] 공격!' : '공격!'
         const msg = `[${this.koName}]:${target.koName}에게 ${attackType}!`
-        const magstyle = isPower? 'full-attack-style' : '';
+        const magstyle = isPower? 'full-attack-style' : 'attack-style';
         this.createMsg(msg,magstyle)
     }
 }
