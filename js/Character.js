@@ -219,6 +219,7 @@ export class Healer extends Character {
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
         this.hpUpdate(this)
+        this.hpBarUpdate(this)
     }
     introduce () {
         const msg = `[${this.koName}] 상처엔 후~ 후시딘`
@@ -274,12 +275,12 @@ export class Undead extends Character {
         super.attack({target,isPower})
         this.recoveryHP()
         this.recoveryHpUpdate()
-        this.hpUpdate(this);
         //console.log(this.hp)
     }
     recoveryHP(){
         this.hp += Math.round(Math.random() * 10);
         this.recoveryMessage()
+        this.hpBarUpdate(this);
     }
     recoveryHpUpdate(){
         const hpState = this.container.querySelector('small');
