@@ -200,18 +200,18 @@ export class Tanker extends Character {
 export class Healer extends Character {
     attack({target,isPower}) {
         super.attack({target,isPower})
-        this.reciveDamage(damage,attacker,isPower)
+        this.isHeal(target,isPower)
     }
-    reciveDamage(damage,attacker,isPower){
-        isPower = Math.random() < 0.55;
-        console.log(isPower)
-        //3의 배수일 때 마다 랜덤확률로 힐
-        if(attacker.count == 3 && isPower) {
+
+    isHeal(target,isPower) {
+        isPower = Math.random() < 55;
+        if(this.count == 4 && isPower) {
+            //3의 배수일 때 마다 랜덤확률로 힐
             this.hp = this.maxHp;
             this.revieveattackMessage()
-            return attacker.count = 0;
+            return this.count = 1;
         } else {
-            this.hp -= damage
+            this.hp -= target.attackPower
         }
     }
     revieveattackMessage(){
