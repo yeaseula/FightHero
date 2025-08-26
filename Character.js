@@ -71,7 +71,7 @@ export class Character {
         attackmsg.classList.add(magstyle)
         attackmsg.innerHTML = `${text}`
         const messageZone = $('.message-zone');
-        messageZone.append(attackmsg);
+        messageZone.prepend(attackmsg);
     }
 
     //공격메시지
