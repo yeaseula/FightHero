@@ -54,9 +54,9 @@ export class Character {
         if(this.count > 0){
             target.reciveDamage(this.attackPower, this)
             this.hpUpdate(target);
+            this.hpBarUpdate(target)
         }
         this.count++;
-        this.hpBarUpdate(target)
 
         //상대방 생존여부 확인
         this.isAlive(target);
