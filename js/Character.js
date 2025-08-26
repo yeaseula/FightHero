@@ -274,6 +274,7 @@ export class Undead extends Character {
         super.attack({target,isPower})
         this.recoveryHP()
         this.recoveryHpUpdate()
+        this.hpUpdate(this);
         //console.log(this.hp)
     }
     recoveryHP(){
