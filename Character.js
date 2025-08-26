@@ -1,8 +1,9 @@
 const $ = (node) => document.querySelector(node);
 
 export class Character {
-    constructor(name,hp,attackPower,type) {
+    constructor(name,hp,attackPower,type,koName) {
         this.name = name;
+        this.koName = koName;
         this.type = type;
         this.attackPower = attackPower;
         this.hp = hp;
@@ -76,8 +77,8 @@ export class Character {
     //공격메시지
     attackMessage(target,isPower){
         const attackType = isPower? '필살기 공격!' : '공격!'
-        const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
-        const magstyle = 'attack-style'
+        const msg = `[${this.koName}]:${target.koName}에게 ${attackType}!`
+        const magstyle = isPower? 'power-attack-style' :'attack-style'
         this.createMsg(msg,magstyle)
     }
 
@@ -145,9 +146,10 @@ export class Wizard extends Character {
 
     //오버라이드
     attackMessage(target,isPower){
+        isPower = true;
         const attackType = isPower? '공격 1회 무효화!' : '공격!'
-        const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
-        const magstyle = 'attack-style'
+        const msg = `[${this.koName}]:${target.koName}에게 공격! ${target.koName}의 ${attackType}!`
+        const magstyle = isPower? 'shield-style':'attack-style'
         this.createMsg(msg,magstyle)
     }
 }
@@ -162,7 +164,7 @@ export class Tanker extends Character {
         this.revieveattackMessage(attacker)
     }
     revieveattackMessage(attacker){
-        const msg = `${attacker.name} 공격력 절반으로 감소!!`
+        const msg = `${attacker.koName} 공격력 절반으로 감소!!`
         const magstyle = 'to-tanker-attack-style'
         this.createMsg(msg,magstyle)
     }
@@ -186,7 +188,7 @@ export class Healer extends Character {
         }
     }
     revieveattackMessage(){
-        const msg = `${this.name} 힐러의 HP가 충전됐습니다.`
+        const msg = `${this.koName} 힐러의 HP가 충전됐습니다.`
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
@@ -215,8 +217,8 @@ export class Cat extends Character {
     }
     attackMessage(target,isPower){
         const attackType = isPower? '즉살기 [냥냥펀치] 공격!' : '공격!'
-        const msg = `[${this.name}]:${target.name} 에게 ${attackType}!`
-        const magstyle = 'full-attack-style'
+        const msg = `[${this.koName}]:${target.koName}에게 ${attackType}!`
+        const magstyle = isPower? 'full-attack-style' : '';
         this.createMsg(msg,magstyle)
     }
 }
@@ -237,15 +239,15 @@ export class Undead extends Character {
         hpState.textContent = `${this.hp}`;
     }
     recoveryMessage(){
-        const msg = `${this.name}의 HP가 +${Math.round(Math.random() * 10)} 증가했습니다.`
+        const msg = `${this.koName}의 HP가 +${Math.round(Math.random() * 10)} 증가했습니다.`
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
 }
 
 export class Slime extends Character {
-    constructor(name,hp,attackPower,type){
-        super(name,hp,attackPower,type)
+    constructor(name,hp,attackPower,type,koName){
+        super(name,hp,attackPower,type,koName)
         setInterval(()=>{
             this.hp += 1;
             this.hpUpdate(this)

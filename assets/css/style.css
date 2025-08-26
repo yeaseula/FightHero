@@ -205,6 +205,13 @@ body.on {
 .message-zone > p.attack-style {
     background-color: #f5f5f5;
 }
+.message-zone > p.power-attack-style {
+    background: linear-gradient(45deg, #FF6F00, #D50000);
+    color: #fff;
+}
+.message-zone > p.shield-style {
+    background-color: #e0e0e0;
+}
 .message-zone > p.heal-style {
     background-color: #A5D6A7;
 }

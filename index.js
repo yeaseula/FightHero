@@ -1,7 +1,4 @@
-import { Character, Tanker, Healer, Cat, Undead, Slime } from "./Character.js";
-import { Hero } from "./Character.js";
-import { Demon } from "./Character.js";
-import { Wizard } from "./Character.js";
+import { Hero, Wizard, Tanker, Healer,Demon, Cat, Undead, Slime } from "./Character.js";
 
 const $ = (node) => document.querySelector(node);
 
@@ -93,22 +90,22 @@ function ChangeContainer() {
 function CharsObjectInit(heroValue,monsterValue){
 
     const heroTeam = {
-        hero: {chars: Hero, hp:98, attackPower: 20, type: 'hero'},
-        wizard: {chars: Wizard, hp:88, attackPower:15, type: 'hero'},
-        tanker: {chars: Tanker, hp:100, attackPower:18, type: 'hero'},
-        healer: {chars: Healer, hp:85, attackPower:12, type: 'hero'}
+        hero: {chars: Hero, hp:98, attackPower: 20, type: 'hero', koName: '용사'},
+        wizard: {chars: Wizard, hp:88, attackPower:15, type: 'hero', koName: '마법사'},
+        tanker: {chars: Tanker, hp:100, attackPower:18, type: 'hero', koName: '탱커'},
+        healer: {chars: Healer, hp:85, attackPower:12, type: 'hero', koName: '힐러'}
     }
 
     const monsterTeam = {
-        demon : {chars: Demon, hp:100, attackPower: 20, type: 'monster'},
-        cat : {chars: Cat, hp:97, attackPower: 18, type: 'monster'},
-        undead : {chars: Undead, hp:85, attackPower: 12, type: 'monster'},
-        slime : {chars: Slime, hp:72, attackPower: 9, type: 'monster'},
+        demon : {chars: Demon, hp:100, attackPower: 20, type: 'monster', koName: '악마'},
+        cat : {chars: Cat, hp:97, attackPower: 18, type: 'monster', koName: '괴수'},
+        undead : {chars: Undead, hp:85, attackPower: 12, type: 'monster', koName: '언데드'},
+        slime : {chars: Slime, hp:72, attackPower: 9, type: 'monster', koName: '슬라임'},
     }
 
     function createCharacter(map,key){
         const Chars = map[key];
-        return new Chars.chars(key,Chars.hp,Chars.attackPower,Chars.type)
+        return new Chars.chars(key,Chars.hp,Chars.attackPower,Chars.type,Chars.koName)
     }
 
     const HeroGet = createCharacter(heroTeam,heroValue)
