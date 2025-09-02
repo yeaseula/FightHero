@@ -436,3 +436,48 @@ body.on {
     border-color: #e0e0e0;
     cursor: initial;
 }
+
+@media(max-width:992px) {
+    .character-select {
+        width: calc(100% - 40px);
+        margin: 0 auto;
+    }
+    .character-select > div {
+        padding: 25px;
+    }
+    .select-container > p {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    .label-container {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .label-container label {
+        flex-basis: calc(50% - 6px);
+    }
+    .ground {
+        width: 97vw;
+    }
+}
+
+@media (max-width:430px) {
+    .label-container .img-box {
+        aspect-ratio: 3 / 4.5;
+    }
+    .label-container .img-box > img {
+        height: 100%;
+    }
+    .hover-contents .hover-title {
+        font-size: 1.2rem;
+    }
+    .hover-contents .hover-cont {
+        font-size: 1.1rem;
+    }
+    .hover-contents .hover-infor {
+        font-size: 1.1rem;
+    }
+    .character-select-btn-container button {
+        font-size: 1.6rem;
+    }
+}

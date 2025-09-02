@@ -215,7 +215,7 @@ export class Healer extends Character {
         }
     }
     revieveattackMessage(){
-        const msg = `${this.koName} 힐러의 HP가 충전됐습니다.`
+        const msg = `[${this.koName}] 힐러의 HP가 충전됐습니다.`
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
         this.hpUpdate(this)
