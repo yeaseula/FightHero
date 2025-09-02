@@ -270,10 +270,11 @@ body.on {
     background-color: var(--pink-soft);
 }
 
-.iswinner-msg {
+.iswinner-msg,.ischoose-msg {
     z-index: -999;
     opacity: 0;
 }
+
 .iswinner-msg.on {
     width: 360px;
     position: fixed;
@@ -296,6 +297,33 @@ body.on {
     font-family: 'child_manseh';
     font-weight: 600;
     font-size: 2.4rem;
+}
+.ischoose-msg.on {
+    width: 380px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    opacity: 1;
+    transform: translate(-50%,-50%);
+    background-color: #424242;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+.ischoose-msg.on p {
+    font-weight: 600;
+    font-size: 2rem;
+    color: #fff;
+}
+#close-msg-btn {
+    font-family: inherit;
+    background-color: #fafafa;
 }
 /* 캐릭터선택 */
 .character-select {

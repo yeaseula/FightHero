@@ -41,7 +41,11 @@ selectBtnNext.addEventListener('click',(e)=>{
     //1페이지에서
     if(!isReady){
         if(heroInput.value.length == 0) {
-            alert('용사팀 캐릭터를 골라야함');
+            const winMessage = `
+                <p>용사팀 캐릭터를 골라야합니다</p>
+                <button type="button" class="com-btn dark" id="close-msg-btn">닫기</button>
+            `
+            modalCom(winMessage)
             return;
         };
 
@@ -54,7 +58,11 @@ selectBtnNext.addEventListener('click',(e)=>{
     //2페이지에서
     if(isReady) {
         if(monsterInput.value.length == 0){
-            alert('몬스터팀 캐릭터를 골라야함');
+            const winMessage = `
+                <p>몬스터팀 캐릭터를 골라야합니다</p>
+                <button type="button" class="com-btn dark" id="close-msg-btn">닫기</button>
+            `
+            modalCom(winMessage)
             return;
         }
         $('.character-select').remove();
@@ -66,6 +74,16 @@ selectBtnNext.addEventListener('click',(e)=>{
         CharsObjectInit(heroValue,monsterValue);
     }
 })
+
+function modalCom (message) {
+    const isWinnerMsg = document.querySelector('.ischoose-msg');
+    isWinnerMsg.classList.add('on');
+    isWinnerMsg.innerHTML = message;
+
+    $('#close-msg-btn').addEventListener('click',()=>{
+        isWinnerMsg.classList.remove('on')
+    })
+}
 
 //prev 버튼 클릭
 selectBtnPrev.addEventListener('click',(e)=>{
