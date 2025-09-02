@@ -33,11 +33,19 @@ export class Character {
     //공격
     attack({target, isPower}) {
         if(this.state == 'dead') {
-            alert('이미 주것서요..')
+            const winMessage = `
+                <p>이미 죽었어요..</p>
+                <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
+            `
+            this.modal(winMessage)
             return
         }
         if(this.isWinner == true) {
-            alert('이미 이겼자나요..')
+            const winMessage = `
+                <p>이미 이겼어요!</p>
+                <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
+            `
+            this.modal(winMessage)
             return
         }
 
@@ -118,17 +126,22 @@ export class Character {
 
     isWinnerMessage () {
         if(this.isWinner) {
-            const isWinnerMsg = document.querySelector('.iswinner-msg');
-            isWinnerMsg.classList.add('on');
-            isWinnerMsg.innerHTML = `
+            const winMessage = `
                 <p>${this.koName}의 승리에요!</p>
                 <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
             `
+            this.modal(winMessage)
+        }
+    }
 
-            $('#close-msg-btn').addEventListener('click',()=>{
-                isWinnerMsg.classList.remove('on')
-            })
-        } else {}
+    modal (message) {
+        const isWinnerMsg = document.querySelector('.iswinner-msg');
+        isWinnerMsg.classList.add('on');
+        isWinnerMsg.innerHTML = message;
+
+        $('#close-msg-btn').addEventListener('click',()=>{
+            isWinnerMsg.classList.remove('on')
+        })
     }
 }
 
