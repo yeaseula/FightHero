@@ -4,11 +4,21 @@ const $ = (node) => document.querySelector(node);
 
 //캐릭터 선택
 async function loadCharacters() {
-    const res = await fetch('./character.json');
-    const data = await res.json();
+    setTimeout(()=>{
+            $('.skeleton-overlay').classList.add('off')
+    },2500)
 
-    renderGroup(data.heroes, 'heroteam', 'hero-container', '몬스터를 토벌하는 용사를 선택하세요!');
-    renderGroup(data.monsters, 'monsterteam', 'monster-container', '용사와 싸우는 몬스터를 선택하세요!');
+    try {
+        const res = await fetch('./character.json');
+        const data = await res.json();
+        renderGroup(data.heroes, 'heroteam', 'hero-container', '몬스터를 토벌하는 용사를 선택하세요!');
+        renderGroup(data.monsters, 'monsterteam', 'monster-container', '용사와 싸우는 몬스터를 선택하세요!');
+        if(!res.ok) {
+            throw new Error('error 발생')
+        }
+    } catch(err) {
+        console.error(err)
+    }
 
     const selectBtnPrev = $('.prev-btn');
     const selectBtnNext = $('.next-btn');
@@ -111,7 +121,6 @@ async function loadCharacters() {
 
     //선택한 캐릭터 객체 생성
     function CharsObjectInit(heroValue,monsterValue){
-
         const heroTeam = {
             hero: {chars: Hero, hp:98, attackPower: 20, type: 'hero', koName: '용사'},
             wizard: {chars: Wizard, hp:88, attackPower:15, type: 'hero', koName: '마법사'},
@@ -167,8 +176,8 @@ async function loadCharacters() {
 }
 
 function renderGroup(list, groupName, containerId, titleText) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = `
+    const container = document.getElementById(containerId);
+    container.innerHTML = `
     <p>${titleText}</p>
     <div class="label-container">
         ${list.map(item => `
@@ -187,7 +196,7 @@ function renderGroup(list, groupName, containerId, titleText) {
         `).join('')}
         </div>
     `;
+    document.querySelectorAll("input[type=radio]").forEach(el => console.log(el.id));
 }
 
 loadCharacters();
-
