@@ -20,7 +20,7 @@
     <script src="js/index.js" type="module"></script>
 </head>
 <body>
-    <div id="loading-skeleton" class="skeleton-overlay">
+    <div id="loading-skeleton" class="skeleton-overlay" aria-hidden="false">
         <div class="spinner"></div>
         <p>캐릭터 생성중..</p>
     </div>
@@ -61,8 +61,8 @@
             <div class="message-zone"></div>
         </div>
 
-        <div class="iswinner-msg"></div>
-        <div class="ischoose-msg"></div>
+        <div class="iswinner-msg" role="dialog" aria-modal="true" aria-labelledby="modal-title"></div>
+        <div class="ischoose-msg" role="dialog" aria-modal="true" aria-labelledby="modal-title"></div>
     </section>
 </body>
 </html>

@@ -6,6 +6,7 @@ const $ = (node) => document.querySelector(node);
 async function loadCharacters() {
     setTimeout(()=>{
             $('.skeleton-overlay').classList.add('off')
+            $('.skeleton-overlay').setAttribute('aria-hidden','true')
     },2500)
 
     try {
@@ -17,7 +18,7 @@ async function loadCharacters() {
             throw new Error('error 발생')
         }
     } catch(err) {
-        console.error(err)
+        alert('일시적으로 데이터 패치에 실패했습니다.')
     }
 
     const selectBtnPrev = $('.prev-btn');
@@ -57,7 +58,7 @@ async function loadCharacters() {
         if(!isReady){
             if(heroInput.value.length == 0) {
                 const winMessage = `
-                    <p>용사팀 캐릭터를 골라야합니다</p>
+                    <p id="modal-title">용사팀 캐릭터를 골라야합니다</p>
                     <button type="button" class="com-btn dark" id="close-msg-btn">닫기</button>
                 `
                 modalCom(winMessage)
@@ -74,7 +75,7 @@ async function loadCharacters() {
         if(isReady) {
             if(monsterInput.value.length == 0){
                 const winMessage = `
-                    <p>몬스터팀 캐릭터를 골라야합니다</p>
+                    <p id="modal-title">몬스터팀 캐릭터를 골라야합니다</p>
                     <button type="button" class="com-btn dark" id="close-msg-btn">닫기</button>
                 `
                 modalCom(winMessage)
@@ -95,9 +96,32 @@ async function loadCharacters() {
         isWinnerMsg.classList.add('on');
         isWinnerMsg.innerHTML = message;
 
+        TabCloser(isWinnerMsg)
+
         $('#close-msg-btn').addEventListener('click',()=>{
             isWinnerMsg.classList.remove('on')
         })
+    }
+
+    function TabCloser(modal) {
+        const focusable = modal.querySelectorAll(
+            'button'
+        )
+        const firstEl = focusable[0]
+        const lastEl = focusable[focusable.length - 1]
+
+        modal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return
+
+            if (e.shiftKey && document.activeElement === firstEl) {
+                e.preventDefault()
+                lastEl.focus()
+            } else if (!e.shiftKey && document.activeElement === lastEl) {
+                e.preventDefault()
+                firstEl.focus()
+            }
+        })
+
     }
 
     //prev 버튼 클릭
@@ -196,7 +220,6 @@ function renderGroup(list, groupName, containerId, titleText) {
         `).join('')}
         </div>
     `;
-    document.querySelectorAll("input[type=radio]").forEach(el => console.log(el.id));
 }
 
 loadCharacters();

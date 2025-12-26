@@ -35,7 +35,9 @@
 }
 .skeleton-overlay {
     position: fixed;
-    top:0; left:0; width:100%; height:100%;
+    top:0; left:0;
+    width:100vw;
+    height:100vh;
     background: #f2f2f2;
     display:flex;
     flex-direction: column;
@@ -106,6 +108,7 @@ body.on {
     color: #212121;
 }
 .ground {
+    visibility: hidden;
     width: 760px;
     height: 50vh;
     margin-top: 50px;
@@ -116,6 +119,7 @@ body.on {
     transition: all 2.8s;
 }
 .ground.on {
+    visibility: visible;
     position: relative;
     z-index: 5;
     opacity: 1;
@@ -303,11 +307,13 @@ body.on {
 }
 
 .iswinner-msg,.ischoose-msg {
+    display: none;
     z-index: -999;
     opacity: 0;
 }
 
 .iswinner-msg.on {
+    display: block;
     width: 360px;
     position: fixed;
     top: 50%;
@@ -331,6 +337,7 @@ body.on {
     font-size: 2.4rem;
 }
 .ischoose-msg.on {
+    display: block;
     width: 380px;
     position: fixed;
     top: 50%;
@@ -373,6 +380,7 @@ body.on {
     color: #fff;
 }
 .select-container {
+    visibility: hidden;
     position: absolute;
     top: 50px;
     left: 0;
@@ -380,6 +388,7 @@ body.on {
     opacity: 0;
 }
 .select-container.on {
+    visibility: visible;
     position: relative;
     top: 0;
     z-index: 5;
@@ -508,6 +517,7 @@ body.on {
 .character-select-btn-container button:disabled {
     background-color: #e0e0e0;
     border-color: #e0e0e0;
+    color: #bdbdbd;
     cursor: initial;
 }
 
