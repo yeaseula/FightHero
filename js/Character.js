@@ -1,4 +1,5 @@
 const $ = (node) => document.querySelector(node);
+let debounce = false
 
 export class Character {
     constructor(name,hp,attackPower,type,koName) {
@@ -34,7 +35,7 @@ export class Character {
     attack({target, isPower}) {
         if(this.state == 'dead') {
             const winMessage = `
-                <p>이미 죽었어요..</p>
+                <p id="modal-title">이미 죽었어요..</p>
                 <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
             `
             this.modal(winMessage)
@@ -42,18 +43,20 @@ export class Character {
         }
         if(this.isWinner == true) {
             const winMessage = `
-                <p>이미 이겼어요!</p>
+                <p id="modal-title">이미 이겼어요!</p>
                 <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
             `
             this.modal(winMessage)
             return
         }
-
+        if(debounce) return
+        debounce = true
         //때리는 모션
         this.container.classList.add('attack');
         setTimeout(() => {
             this.container.classList.remove('attack')
-        }, 850);
+            debounce = false
+        }, 800);
 
         //공격 메시지
         this.attackMessage(target,isPower)
@@ -72,7 +75,7 @@ export class Character {
     }
 
     //데미지 함수
-    reciveDamage(damage,attacker){
+    reciveDamage(damage){
         const realDamage = damage;
         this.hp -= damage;
     }
@@ -127,7 +130,7 @@ export class Character {
     isWinnerMessage () {
         if(this.isWinner) {
             const winMessage = `
-                <p>${this.koName}의 승리에요!</p>
+                <p id="modal-title">${this.koName}의 승리에요!</p>
                 <button type="button" class="com-btn" id="close-msg-btn">닫기</button>
             `
             this.modal(winMessage)
@@ -138,6 +141,9 @@ export class Character {
         const isWinnerMsg = document.querySelector('.iswinner-msg');
         isWinnerMsg.classList.add('on');
         isWinnerMsg.innerHTML = message;
+
+        const focusable = isWinnerMsg.querySelector('button')
+        focusable.focus()
 
         $('#close-msg-btn').addEventListener('click',()=>{
             isWinnerMsg.classList.remove('on')

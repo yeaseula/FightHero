@@ -81,6 +81,9 @@
     background-color: var(--pink-middle);
     border-color: var(--pink-middle);
 }
+.com-btn:focus-visible {
+    outline: 2px solid var(--pink-middle);
+}
 html {
     font-size: 10px;
 }
@@ -116,7 +119,7 @@ body.on {
     top: 0;
     z-index: -999;
     opacity: 0;
-    transition: all 2.8s;
+    transition: all 1.5s;
 }
 .ground.on {
     visibility: visible;
