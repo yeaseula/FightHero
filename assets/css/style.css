@@ -310,13 +310,11 @@ body.on {
 }
 
 .iswinner-msg,.ischoose-msg {
-    display: none;
     z-index: -999;
     opacity: 0;
 }
 
 .iswinner-msg.on {
-    display: block;
     width: 360px;
     position: fixed;
     top: 50%;
@@ -410,8 +408,7 @@ body.on {
     align-items: center;
 }
 
-.select-container input:checked +label .img-box {
-  border: 5px solid transparent;
+.select-container label:has(input:checked) .img-box {
   border-image: linear-gradient(
     135deg,
     var(--gold-dark),
@@ -424,18 +421,15 @@ body.on {
     0 0 0 1px rgba(255,255,255,0.05) inset,
     0 8px 18px rgba(0,0,0,0.45);
 }
-.select-container input:focus +label .img-box {
+.select-container label:has(input:focus-visible) .img-box{
   border-image: linear-gradient(
     135deg,
-    var(--gold-dark),
+    var(--point-color),
     var(--gold-champagne) 25%,
-    var(--gold-antique) 50%,
+    var(--point-color) 50%,
     var(--gold-champagne) 75%,
-    var(--gold-bronze)
+    var(--point-color)
   ) 1;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.05) inset,
-    0 8px 18px rgba(0,0,0,0.45);
 }
 .label-container label {
     flex-grow: 1;
@@ -522,6 +516,9 @@ body.on {
     border-color: #e0e0e0;
     color: #bdbdbd;
     cursor: initial;
+}
+.character-select-btn-container button:focus-visible {
+    outline: 3px solid #ffffff;
 }
 
 @media(max-width:992px) {

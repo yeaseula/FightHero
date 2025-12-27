@@ -4,16 +4,17 @@ const $ = (node) => document.querySelector(node);
 
 //캐릭터 선택
 async function loadCharacters() {
-    setTimeout(()=>{
-            $('.skeleton-overlay').classList.add('off')
-            $('.skeleton-overlay').setAttribute('aria-hidden','true')
-    },2500)
+    // setTimeout(()=>{
+    //         $('.skeleton-overlay').classList.add('off')
+    //         $('.skeleton-overlay').setAttribute('aria-hidden','true')
+    // },2500)
 
     try {
         const res = await fetch('./character.json');
         const data = await res.json();
-        renderGroup(data.heroes, 'heroteam', 'hero-container', '몬스터를 토벌하는 용사를 선택하세요!');
-        renderGroup(data.monsters, 'monsterteam', 'monster-container', '용사와 싸우는 몬스터를 선택하세요!');
+        renderGroup(data.heroes, 'heroteam', 'hero-container', '몬스터를 토벌하는 용사를 선택하세요!', 'true');
+        renderGroup(data.monsters, 'monsterteam', 'monster-container', '용사와 싸우는 몬스터를 선택하세요!', 'false');
+
         if(!res.ok) {
             throw new Error('error 발생')
         }
@@ -28,7 +29,7 @@ async function loadCharacters() {
     // 2페이지에서 다음 버튼이 Go Fight 텍스트로 변경
     // 1페이지에서 선택을 해야 다음 버튼 누르기 가능
 
-    //초기 '이전'버튼은 비활성화
+    //초기 '이전'버튼은 비활성화, monster는 스크린리더 숨김
     selectBtnPrev.disabled = true;
 
     //riado 버튼 선택시 선택값이 input 필드로 넘어가도록
@@ -69,6 +70,8 @@ async function loadCharacters() {
             selectBtnPrev.disabled = false;
             selectBtnNext.classList.add('go-btn');
             e.currentTarget.textContent = '결투하러 가기'
+
+            Accessibility('hero-container','monster-container')
         }
 
         //2페이지에서
@@ -96,7 +99,7 @@ async function loadCharacters() {
         isWinnerMsg.classList.add('on');
         isWinnerMsg.innerHTML = message;
 
-        TabCloser(isWinnerMsg)
+        // TabCloser(isWinnerMsg)
 
         $('#close-msg-btn').addEventListener('click',()=>{
             isWinnerMsg.classList.remove('on')
@@ -130,6 +133,7 @@ async function loadCharacters() {
         selectBtnPrev.disabled = true;
         selectBtnNext.classList.remove('go-btn');
         selectBtnNext.textContent = '다음'
+        Accessibility('monster-container','hero-container')
     })
 
     function ChangeContainer() {
@@ -199,14 +203,14 @@ async function loadCharacters() {
     }
 }
 
-function renderGroup(list, groupName, containerId, titleText) {
+function renderGroup(list, groupName, containerId, titleText, active) {
     const container = document.getElementById(containerId);
     container.innerHTML = `
     <p>${titleText}</p>
     <div class="label-container">
         ${list.map(item => `
-        <input type="radio" value="${item.value}" id="${item.id}" name="${groupName}">
-        <label for="${item.id}">
+            <label for="${item.id}">
+            <input type="radio" value="${item.value}" id="${item.id}" name="${groupName}" tabindex=${active === 'true' ? 1 : -1}>
             <div class="img-box">
                 <img src="${item.img}" alt="${item.alt}">
                 <div class="hover-contents">
@@ -220,6 +224,20 @@ function renderGroup(list, groupName, containerId, titleText) {
         `).join('')}
         </div>
     `;
+}
+
+function Accessibility(nonActiveSection,activeSection) {
+    const nonActiveSectionName = document.getElementById(nonActiveSection)
+    nonActiveSectionName.querySelectorAll('input[type="radio"]').forEach((ele)=>{
+        ele.setAttribute('tabindex',-1)
+    })
+    nonActiveSectionName.setAttribute('aria-hidden','true')
+
+    const activeSectionName = document.getElementById(activeSection)
+    activeSectionName.querySelectorAll('input[type="radio"]').forEach((ele)=>{
+        ele.setAttribute('tabindex',1)
+    })
+    activeSectionName.setAttribute('aria-hidden','false')
 }
 
 loadCharacters();

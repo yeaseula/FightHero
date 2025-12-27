@@ -76,7 +76,6 @@ export class Character {
 
     //데미지 함수
     reciveDamage(damage){
-        const realDamage = damage;
         this.hp -= damage;
     }
 
@@ -142,13 +141,30 @@ export class Character {
         isWinnerMsg.classList.add('on');
         isWinnerMsg.innerHTML = message;
 
-        const focusable = isWinnerMsg.querySelector('button')
-        focusable.focus()
+
+        const Ground = document.querySelector('.ground')
+        Ground.setAttribute('aria-hidden','true')
+
+        Accessibility(Ground,'-1')
+
+        Accessibility(isWinnerMsg,'1')
 
         $('#close-msg-btn').addEventListener('click',()=>{
             isWinnerMsg.classList.remove('on')
+            isWinnerMsg.innerHTML = ''
+            Ground.setAttribute('aria-hidden','false') // 원상복구
+
+            Accessibility(Ground,'1')
         })
     }
+}
+
+function Accessibility(target,tabindex) {
+    const targetElements = target.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    targetElements.forEach((ele)=>{{
+        tabindex === '-1' && ele.blur()
+        ele.setAttribute('tabindex',tabindex)
+    }})
 }
 
 export class Hero extends Character {
