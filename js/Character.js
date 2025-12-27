@@ -82,8 +82,15 @@ export class Character {
     //메시지 컴포넌트
     createMsg(text,magstyle){
         const attackmsg = document.createElement('p')
+        const attactime = document.createElement('span')
+        const date = new Date();
+        const datereal = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+        attactime.innerHTML = `${datereal}`
+
         attackmsg.classList.add(magstyle)
         attackmsg.innerHTML = `${text}`
+        attackmsg.append(attactime)
+
         const messageZone = $('.message-zone');
         messageZone.prepend(attackmsg);
     }

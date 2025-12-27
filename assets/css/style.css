@@ -282,6 +282,9 @@ body.on {
     font-size: 1.7rem;
     font-family: 'child_manseh';
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
 }
 .message-zone > p.intro-style {
     background-color: #FFF9C4;
