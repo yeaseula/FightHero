@@ -313,16 +313,17 @@ export class Undead extends Character {
         //console.log(this.hp)
     }
     recoveryHP(){
-        this.hp += Math.round(Math.random() * 10);
-        this.recoveryMessage()
+        const recoveryPoint = Math.round(Math.random() * 11)
+        this.hp += recoveryPoint;
+        this.recoveryMessage(recoveryPoint)
         this.hpBarUpdate(this);
     }
     recoveryHpUpdate(){
         const hpState = this.container.querySelector('small');
         hpState.textContent = `${this.hp}`;
     }
-    recoveryMessage(){
-        const msg = `${this.koName}의 HP가 +${Math.round(Math.random() * 10)} 증가했습니다.`
+    recoveryMessage(recoveryPoint){
+        const msg = `${this.koName}의 HP가 +${recoveryPoint} 증가했습니다.`
         const magstyle = 'heal-style'
         this.createMsg(msg,magstyle)
     }
